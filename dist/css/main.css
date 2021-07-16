@@ -1,0 +1,34 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Open Sans", sans-serif;
+	background-color: #eeeeee;
+	margin-bottom: 100px;
+  }
+.navbar {
+	background-color: #FAF1E6;
+	width: 100%;
+	position: fixed;
+	color: #ffffff;
+	z-index: 1;
+	top: 0;
+	list-style: none;
+	text-align: center;
+	padding-top: 20px;
+	padding-bottom: 20px;
+	margin: 0;
+  }
+  
+  .navbar > li {
+	display: inline-block;
+	padding: 3px 180px 0 10px;
+	font-size: 40px;
+	font-weight: bolder;
+	color: #064420;
+  }
+  #navLogo {
+	font-size: 40px;
+  }
+  .fa-sun-haze--fa-secondary-color {
+	  color: rgb(194, 43, 43);
+  }
