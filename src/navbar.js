@@ -1,4 +1,4 @@
-import makeElement from "./make-elements";
+import { makeElement } from "./make-elements";
 
 const content = document.getElementById("content");
 

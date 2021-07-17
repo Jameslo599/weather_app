@@ -1,8 +1,9 @@
 body {
 	margin: 0;
+	margin-top: 100px;
 	padding: 0;
 	font-family: "Open Sans", sans-serif;
-	background-color: #eeeeee;
+	background-color: #E4EFE7;
 	margin-bottom: 100px;
   }
 .navbar {
@@ -21,7 +22,7 @@ body {
   
   .navbar > li {
 	display: inline-block;
-	padding: 3px 180px 0 10px;
+	padding: 3px 120px 0 10px;
 	font-size: 40px;
 	font-weight: bolder;
 	color: #064420;
@@ -32,3 +33,42 @@ body {
   .fa-sun-haze--fa-secondary-color {
 	  color: rgb(194, 43, 43);
   }
+
+#grid {
+	display: grid;
+	grid-template-columns: [col] 1fr [col] 1fr;
+	grid-template-rows: [row] auto [row] auto;
+	text-align: center;
+}
+
+.description {
+	grid-column: col / span 2;
+	grid-row: row 2;
+	background-color: #FDFAF6;
+}
+.description h2 {
+	margin: 50px 0 50px 0;
+}
+
+#forecastHolder {
+	width: 49%;
+    height: 200px;
+    position: fixed;
+    display: flex;
+    margin-top: 15px;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #064420;
+    border-left: none;
+    border-right: none;
+    overflow-x: scroll;
+}
+.forecast {
+	margin-left: 20px;
+	margin-right: 20px;
+	padding-top: 75px;
+}
+#minMaxHolder {
+	display: inline-grid;
+    grid-template-columns: 1fr 1fr;
+}

@@ -8,5 +8,10 @@ const makeElement = ({
 	element.setAttribute("class", className);
 	return element;
   };
+
+  const elementMethods = (element) => {
+	const appendToBody = (destination) => document.getElementById(destination).appendChild(element);
+	return {appendToBody};
+  };
   
-  export default makeElement
+  export {makeElement, elementMethods}
