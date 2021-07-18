@@ -3,7 +3,7 @@ body {
 	margin-top: 100px;
 	padding: 0;
 	font-family: "Open Sans", sans-serif;
-	background-color: #E4EFE7;
+	background-color: #FDFAF6;
 	margin-bottom: 100px;
   }
 .navbar {
@@ -21,17 +21,47 @@ body {
   }
   
   .navbar > li {
-	display: inline-block;
-	padding: 3px 120px 0 10px;
+	padding: 0px 0px 0 10px;
 	font-size: 40px;
 	font-weight: bolder;
 	color: #064420;
+	float: left;
   }
   #navLogo {
 	font-size: 40px;
+	float: left;
   }
   .fa-sun-haze--fa-secondary-color {
 	  color: rgb(194, 43, 43);
+  }
+  #searchHolder {
+	margin: 3px 0 0 0;
+  }
+  #textInput {
+	border-radius: 5px 0px 0px 5px;
+    border-right: none;
+    border-width: thin;
+	padding: 10px 100px 10px 10px;
+  }
+  #searchButton {
+	border-radius: 0px 5px 5px 0px;
+    border-left: none;
+    border-width: thin;
+	background-color: #064420;
+	color: #FDFAF6;
+	padding: 10px;
+  }
+  #convertButton {
+	float: right;
+    margin: 0 100px 0 0;
+	padding: 10px;
+    padding: 10px 100px;
+	background-color: #064420;
+	color: #FDFAF6;
+	border-radius: 5px;
+  }
+  #convertButton:before {
+	content: "\00b0 C / \00b0 F";
   }
 
 #grid {
@@ -44,7 +74,7 @@ body {
 .description {
 	grid-column: col / span 2;
 	grid-row: row 2;
-	background-color: #FDFAF6;
+	background-color: #E4EFE7;
 }
 .description h2 {
 	margin: 50px 0 50px 0;
@@ -57,7 +87,7 @@ body {
     display: flex;
     margin-top: 15px;
     border-style: solid;
-    border-width: 2px;
+    border-width: thin;
     border-color: #064420;
     border-left: none;
     border-right: none;

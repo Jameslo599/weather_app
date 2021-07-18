@@ -15,12 +15,27 @@ const makeNavbar = () => {
   navLogo.style = "--fa-primary-color: #046582; --fa-secondary-color: #CD113B; --fa-secondary-opacity: 1";
   navBar.appendChild(navLogo);
 
-  const navItems = makeElement({ type: "li", id: "nav", className: "nav" });
-  navItems.innerHTML = "Weather";
-  navBar.appendChild(navItems);
+  const navTitle = makeElement({ type: "li", id: "nav", className: "nav" });
+  navTitle.innerHTML = "Weather";
+  navBar.appendChild(navTitle);
 
-  const taskLink = makeElement({ type: "a", href: "#" });
-  navBar.appendChild(taskLink);
+  const searchContainer = makeElement({ type: "div", id: "searchHolder", className: "" });
+  navBar.appendChild(searchContainer);
+
+  const searchBar = makeElement({ type: "input", id: "textInput", className: "bar" });
+	searchBar.setAttribute('type', 'text');
+	searchBar.setAttribute('placeholder', 'Enter City Name')
+	searchContainer.appendChild(searchBar);
+
+  const searchButton = makeElement({ type: "button", id: "searchButton", className: "bar" });
+  searchButton.innerHTML = 'Search'
+  searchContainer.appendChild(searchButton);
+
+  const convertButton = makeElement({ type: "button", id: "convertButton", className: "" });
+  searchContainer.appendChild(searchButton);
+  searchContainer.appendChild(convertButton)
+
+
 };
 
 export { makeNavbar, content };
