@@ -1,4 +1,4 @@
-import format from "date-fns/format";
+import { format, fromUnixTime } from "date-fns";
 
 let tempSetting = 0;
 
@@ -6,15 +6,18 @@ const conditionArray = [];
 
 const stripValues = (string) => string.replace(/\D/g, "");
 
-const convertKelvintoFahrenheit = (kelvin) =>
-  Math.round((kelvin - 273.15) * (9 / 5) + 32);
-
 const convertToPercent = (decimal) => Math.round(decimal * 100);
 
 const fetchWeather = async (query) => {
   try {
+    const coordinates = await fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      { mode: "cors" }
+    );
+    const coordinateData = await coordinates.json();
+    console.log(coordinateData);
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/weather?q=${query}&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=imperial&exclude=minutely,alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     if (!response.ok) {
@@ -22,79 +25,112 @@ const fetchWeather = async (query) => {
     } else {
       const weatherData = await response.json();
       console.log(weatherData);
-      conditionArray.splice(0, 1, weatherData.weather[0].description);
-      document.getElementById("cityName").innerHTML = weatherData.name;
+      conditionArray.splice(0, 1, weatherData.current.weather[0].description);
+      document.getElementById("cityName").innerHTML = coordinateData[0].name;
       document.getElementById("conditionName").innerHTML =
-        weatherData.weather[0].main;
-      document.getElementById(
-        "mainTemperature"
-      ).innerHTML = `${convertKelvintoFahrenheit(weatherData.main.temp)}°`;
-      document.getElementById(
-        "mainHigh"
-      ).innerHTML = `H: ${convertKelvintoFahrenheit(
-        weatherData.main.temp_max
+        weatherData.current.weather[0].main;
+      document.getElementById("mainTemperature").innerHTML = `${Math.round(
+        weatherData.current.temp
       )}°`;
-      document.getElementById(
-        "mainLow"
-      ).innerHTML = `L: ${convertKelvintoFahrenheit(
-        weatherData.main.temp_min
+      document.getElementById("mainHigh").innerHTML = `H: ${Math.round(
+        weatherData.daily[0].temp.max
+      )}°`;
+      document.getElementById("mainLow").innerHTML = `L: ${Math.round(
+        weatherData.daily[0].temp.min
       )}°`;
       document.getElementById("description").innerHTML = `Today: ${
-        weatherData.weather[0].description
-      }. The high will be ${convertKelvintoFahrenheit(
-        weatherData.main.temp_max
-      )}° and the low will be ${convertKelvintoFahrenheit(
-        weatherData.main.temp_min
-      )}°`;
+        weatherData.current.weather[0].main
+      }. The high will be ${Math.round(
+        weatherData.daily[0].temp.max
+      )}° and the low will be ${Math.round(weatherData.daily[0].temp.min)}°`;
+
+      for (let i = 0; i <= 47; i += 1) {
+        document.getElementById(`time${i}`).innerHTML = `${format(
+          new Date(fromUnixTime(weatherData.hourly[i].dt)),
+          "MMM d, H:00"
+        )}`;
+        document.getElementById(
+          `rain${i}`
+        ).innerHTML = `Rain: ${convertToPercent(weatherData.hourly[i].pop)}%`;
+        document.getElementById(
+          `image${i}`
+        ).src = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
+        document.getElementById(`temp${i}`).innerHTML = `${Math.round(
+          weatherData.hourly[i].temp
+        )}°`;
+      }
     }
   } catch (error) {
     alert(error);
   }
 };
 
-const fetchForecast = async (query) => {
+const fetchCelsius = async (query) => {
   try {
+    const coordinates = await fetch(
+      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      { mode: "cors" }
+    );
+    const coordinateData = await coordinates.json();
+    console.log(coordinateData);
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${query}&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=metric&exclude=minutely,alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     if (!response.ok) {
       throw new Error("Your search did not return any results");
     } else {
-      const forecastData = await response.json();
-      console.log(forecastData);
-      for (let i = 0; i <= 31; i += 1) {
+      const weatherData = await response.json();
+      console.log(weatherData);
+      conditionArray.splice(0, 1, weatherData.current.weather[0].description);
+      document.getElementById("cityName").innerHTML = coordinateData[0].name;
+      document.getElementById("conditionName").innerHTML =
+        weatherData.current.weather[0].main;
+      document.getElementById("mainTemperature").innerHTML = `${Math.round(
+        weatherData.current.temp
+      )}°`;
+      document.getElementById("mainHigh").innerHTML = `H: ${Math.round(
+        weatherData.daily[0].temp.max
+      )}°`;
+      document.getElementById("mainLow").innerHTML = `L: ${Math.round(
+        weatherData.daily[0].temp.min
+      )}°`;
+      document.getElementById("description").innerHTML = `Today: ${
+        weatherData.current.weather[0].main
+      }. The high will be ${Math.round(
+        weatherData.daily[0].temp.max
+      )}° and the low will be ${Math.round(weatherData.daily[0].temp.min)}°`;
+
+      for (let i = 0; i <= 47; i += 1) {
         document.getElementById(`time${i}`).innerHTML = `${format(
-          new Date(forecastData.list[i].dt_txt),
+          new Date(fromUnixTime(weatherData.hourly[i].dt)),
           "MMM d, H:00"
         )}`;
         document.getElementById(
           `rain${i}`
-        ).innerHTML = `Rain: ${convertToPercent(forecastData.list[i].pop)}%`;
+        ).innerHTML = `Rain: ${convertToPercent(weatherData.hourly[i].pop)}%`;
         document.getElementById(
           `image${i}`
-        ).src = `http://openweathermap.org/img/wn/${forecastData.list[i].weather[0].icon}@2x.png`;
-        document.getElementById(
-          `temp${i}`
-        ).innerHTML = `${convertKelvintoFahrenheit(
-          forecastData.list[i].main.temp
+        ).src = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
+        document.getElementById(`temp${i}`).innerHTML = `${Math.round(
+          weatherData.hourly[i].temp
         )}°`;
       }
     }
   } catch (error) {
-    console.log(error);
+    alert(error);
   }
 };
 
 const submitQuery = () => {
   document.getElementById("searchButton").addEventListener("click", () => {
-    const city = document.getElementById("textInput").value;
-    fetchWeather(`${city}`);
-  });
-
-  document.getElementById("searchButton").addEventListener("click", () => {
-    const city = document.getElementById("textInput").value;
-    fetchForecast(`${city}`);
+    if (tempSetting === 0) {
+      const city = document.getElementById("textInput").value;
+      fetchWeather(`${city}`);
+    } else if (tempSetting === 1) {
+      const city = document.getElementById("textInput").value;
+      fetchCelsius(`${city}`);
+    }
   });
 
   document.getElementById("textInput").addEventListener("keyup", (event) => {
@@ -181,4 +217,4 @@ const convertTemperatures = () => {
   });
 };
 
-export { fetchWeather, submitQuery, fetchForecast, convertTemperatures };
+export { fetchWeather, submitQuery, convertTemperatures };

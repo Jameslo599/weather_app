@@ -48,7 +48,7 @@ const generateMainDisplay = () => {
     className: "",
   });
   forecastDisplay.appendChild(forecastHolder);
-  for (let i = 0; i <= 31; i += 1) {
+  for (let i = 0; i <= 47; i += 1) {
     const forecast = makeElement({
       type: "div",
       id: `forecast${i}`,
@@ -62,7 +62,6 @@ const generateMainDisplay = () => {
       className: "time",
     });
     forecast.appendChild(time);
-    time.innerHTML = "james";
 
     const rain = makeElement({
       type: "p",
@@ -70,7 +69,6 @@ const generateMainDisplay = () => {
       className: "rain",
     });
     forecast.appendChild(rain);
-    rain.innerHTML = "james";
 
     const image = makeElement({
       type: "img",
@@ -85,7 +83,6 @@ const generateMainDisplay = () => {
       className: "temp",
     });
     forecast.appendChild(temp);
-    temp.innerHTML = "james";
   }
   const descriptionDisplay = makeElement({
     type: "div",
