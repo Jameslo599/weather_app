@@ -1,104 +1,132 @@
 body {
-	margin: 0;
-	margin-top: 100px;
-	padding: 0;
-	font-family: "Open Sans", sans-serif;
-	background-color: #FDFAF6;
-	margin-bottom: 100px;
-  }
+  margin: 0;
+  margin-top: 100px;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+  background-color: #fdfaf6;
+  margin-bottom: 100px;
+}
 .navbar {
-	background-color: #FAF1E6;
-	width: 100%;
-	position: fixed;
-	color: #ffffff;
-	z-index: 1;
-	top: 0;
-	list-style: none;
-	text-align: center;
-	padding-top: 20px;
-	padding-bottom: 20px;
-	margin: 0;
-  }
-  
-  .navbar > li {
-	padding: 0px 0px 0 10px;
-	font-size: 40px;
-	font-weight: bolder;
-	color: #064420;
-	float: left;
-  }
-  #navLogo {
-	font-size: 40px;
-	float: left;
-  }
-  .fa-sun-haze--fa-secondary-color {
-	  color: rgb(194, 43, 43);
-  }
-  #searchHolder {
-	margin: 3px 0 0 0;
-  }
-  #textInput {
-	border-radius: 5px 0px 0px 5px;
-    border-right: none;
-    border-width: thin;
-	padding: 10px 100px 10px 10px;
-  }
-  #searchButton {
-	border-radius: 0px 5px 5px 0px;
-    border-left: none;
-    border-width: thin;
-	background-color: #064420;
-	color: #FDFAF6;
-	padding: 10px;
-  }
-  #convertButton {
-	float: right;
-    margin: 0 100px 0 0;
-	padding: 10px;
-    padding: 10px 100px;
-	background-color: #064420;
-	color: #FDFAF6;
-	border-radius: 5px;
-  }
-  #convertButton:before {
-	content: "\00b0 C / \00b0 F";
-  }
+  background-color: #faf1e6;
+  width: 100%;
+  position: fixed;
+  color: #ffffff;
+  z-index: 1;
+  top: 0;
+  list-style: none;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin: 0;
+}
+
+.navbar > li {
+  padding: 0px 0px 0 10px;
+  font-size: 40px;
+  font-weight: bolder;
+  color: #064420;
+  float: left;
+}
+#navLogo {
+  font-size: 40px;
+  float: left;
+}
+.fa-sun-haze--fa-secondary-color {
+  color: rgb(194, 43, 43);
+}
+#searchHolder {
+  margin: 3px 0 0 0;
+}
+#textInput {
+  border-radius: 5px 0px 0px 5px;
+  border-right: none;
+  border-width: thin;
+  padding: 10px 100px 10px 10px;
+}
+#searchButton {
+  border-radius: 0px 5px 5px 0px;
+  border-left: none;
+  border-width: thin;
+  background-color: #064420;
+  color: #fdfaf6;
+  padding: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#searchButton:hover {
+  background-color: #0a6d33;
+}
+#convertButton {
+  float: right;
+  margin: 0 100px 0 0;
+  padding: 10px;
+  padding: 8px 100px;
+  font-size: 20px;
+  background-color: #064420;
+  color: #fdfaf6;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.25s;
+}
+#convertButton:hover {
+  background-color: #0a6d33;
+}
 
 #grid {
-	display: grid;
-	grid-template-columns: [col] 1fr [col] 1fr;
-	grid-template-rows: [row] auto [row] auto;
-	text-align: center;
+  display: grid;
+  grid-template-columns: [col] 1fr [col] 1fr;
+  grid-template-rows: [row] auto [row] auto;
+  text-align: center;
+}
+
+#mainTemperature {
+  font-size: 5em;
+  font-weight: 500;
+  padding-left: 30px;
+  margin: 0;
+}
+.city {
+  color: #064420;
 }
 
 .description {
-	grid-column: col / span 2;
-	grid-row: row 2;
-	background-color: #E4EFE7;
+  grid-column: col / span 2;
+  grid-row: row 2;
+  background-color: #e4efe7;
 }
 .description h2 {
-	margin: 50px 0 50px 0;
+  margin: 50px 0 50px 0;
 }
 
 #forecastHolder {
-	width: 49%;
-    height: 200px;
-    position: fixed;
-    display: flex;
-    margin-top: 15px;
-    border-style: solid;
-    border-width: thin;
-    border-color: #064420;
-    border-left: none;
-    border-right: none;
-    overflow-x: scroll;
+  width: 49%;
+  height: 250px;
+  position: fixed;
+  display: flex;
+  margin-top: 15px;
+  border-style: solid;
+  border-width: thin;
+  border-color: #064420;
+  border-left: none;
+  border-right: none;
+  overflow-x: scroll;
 }
 .forecast {
-	margin-left: 20px;
-	margin-right: 20px;
-	padding-top: 75px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.time {
+  width: 100px;
+  font-weight: bold;
+}
+.rain {
+  color: #185adb;
+}
+.temp {
+  font-size: 20px;
 }
 #minMaxHolder {
-	display: inline-grid;
-    grid-template-columns: 1fr 1fr;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
 }
