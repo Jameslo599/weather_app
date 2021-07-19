@@ -95,7 +95,42 @@ const generateMainDisplay = () => {
     className: "",
   });
   descriptionDisplay.appendChild(description);
-  const divArray = [cityDisplay, forecastDisplay, descriptionDisplay];
+
+  const dataDisplay = makeElement({
+    type: "div",
+    id: "dataDisplay",
+    className: "",
+  });
+
+  for (let i = 0; i <= 9; i += 1) {
+    const dataHolder = makeElement({
+      type: "div",
+      id: `dataHolder${i}`,
+      className: "",
+    });
+    dataDisplay.appendChild(dataHolder);
+
+    const dataType = makeElement({
+      type: "h2",
+      id: `dataType${i}`,
+      className: "dataType",
+    });
+    dataHolder.appendChild(dataType);
+
+    const data = makeElement({
+      type: "h2",
+      id: `data${i}`,
+      className: "data",
+    });
+    dataHolder.appendChild(data);
+  }
+
+  const divArray = [
+    cityDisplay,
+    forecastDisplay,
+    descriptionDisplay,
+    dataDisplay,
+  ];
   divArray.forEach((element) => {
     elementMethods(element).appendToBody("grid");
   });

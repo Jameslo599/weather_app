@@ -76,7 +76,7 @@ body {
 #grid {
   display: grid;
   grid-template-columns: [col] 1fr [col] 1fr;
-  grid-template-rows: [row] auto [row] auto;
+  grid-template-rows: [row] auto [row] auto [row] auto;
   text-align: center;
 }
 
@@ -99,10 +99,19 @@ body {
   margin: 50px 0 50px 0;
 }
 
+#dataDisplay {
+  grid-column: col / span 2;
+  grid-row: row 3;
+  background-color: #e4efe7;
+}
+#data {
+  margin: 50px 0 50px 0;
+}
+
 #forecastHolder {
   width: 49%;
   height: 250px;
-  position: fixed;
+  position: absolute;
   display: flex;
   margin-top: 15px;
   border-style: solid;
@@ -129,4 +138,19 @@ body {
 #minMaxHolder {
   display: inline-grid;
   grid-template-columns: 1fr 1fr;
+}
+#dataDisplay {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  background-color: #faf1e6;
+  padding: 50px 100px 50px 100px;
+}
+.dataType {
+  color: #064420;
+  font-size: 20px;
+  font-weight: lighter;
+}
+.data {
+  color: #064420;
+  font-size: 25px;
 }

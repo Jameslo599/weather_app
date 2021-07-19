@@ -8,6 +8,36 @@ const stripValues = (string) => string.replace(/\D/g, "");
 
 const convertToPercent = (decimal) => Math.round(decimal * 100);
 
+const degreeToCompass = (num) => {
+  const value = Math.round(num / 22.5 + 0.5);
+  const directionArray = [
+    "N",
+    "NNE",
+    "NE",
+    "ENE",
+    "E",
+    "ESE",
+    "SE",
+    "SSE",
+    "S",
+    "SSW",
+    "SW",
+    "WSW",
+    "W",
+    "WNW",
+    "NW",
+    "NNW",
+  ];
+  return directionArray[value % 16];
+};
+
+const hectoPascalToMM = (num) => Math.round(num * 0.75006);
+const hectoPascalToInches = (num) => Math.round(num * 0.02953);
+
+const metersToMiles = (num) => Math.round(num * 0.000621);
+
+const mmToInches = (num) => Math.round(num / 25.4);
+
 const fetchWeather = async (query) => {
   try {
     const coordinates = await fetch(
@@ -17,7 +47,7 @@ const fetchWeather = async (query) => {
     const coordinateData = await coordinates.json();
     console.log(coordinateData);
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=imperial&exclude=minutely,alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=imperial&exclude=alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     if (!response.ok) {
@@ -47,7 +77,7 @@ const fetchWeather = async (query) => {
       for (let i = 0; i <= 47; i += 1) {
         document.getElementById(`time${i}`).innerHTML = `${format(
           new Date(fromUnixTime(weatherData.hourly[i].dt)),
-          "MMM d, H:00"
+          "MMM d, h a"
         )}`;
         document.getElementById(
           `rain${i}`
@@ -59,6 +89,37 @@ const fetchWeather = async (query) => {
           weatherData.hourly[i].temp
         )}°`;
       }
+
+      document.getElementById("data0").innerHTML = `${format(
+        new Date(fromUnixTime(weatherData.current.sunrise)),
+        "h:mm a"
+      )}`;
+      document.getElementById("data1").innerHTML = `${format(
+        new Date(fromUnixTime(weatherData.current.sunset)),
+        "h:mm a"
+      )}`;
+      document.getElementById("data2").innerHTML = `${convertToPercent(
+        weatherData.hourly[0].pop
+      )}%`;
+      document.getElementById(
+        "data3"
+      ).innerHTML = `${weatherData.current.humidity}%`;
+      document.getElementById("data4").innerHTML = `${degreeToCompass(
+        weatherData.current.wind_deg
+      )} ${Math.round(weatherData.current.wind_speed)} mph`;
+      document.getElementById("data5").innerHTML = `${Math.round(
+        weatherData.current.feels_like
+      )}°`;
+      document.getElementById("data6").innerHTML = `${mmToInches(
+        weatherData.minutely[0].precipitation
+      )} in`;
+      document.getElementById("data7").innerHTML = `${hectoPascalToInches(
+        weatherData.current.pressure
+      )} inHg`;
+      document.getElementById("data8").innerHTML = `${metersToMiles(
+        weatherData.current.visibility
+      )} mi`;
+      document.getElementById("data9").innerHTML = `${weatherData.current.uvi}`;
     }
   } catch (error) {
     alert(error);
@@ -74,7 +135,7 @@ const fetchCelsius = async (query) => {
     const coordinateData = await coordinates.json();
     console.log(coordinateData);
     const response = await fetch(
-      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=metric&exclude=minutely,alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=metric&exclude=alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     if (!response.ok) {
@@ -104,7 +165,7 @@ const fetchCelsius = async (query) => {
       for (let i = 0; i <= 47; i += 1) {
         document.getElementById(`time${i}`).innerHTML = `${format(
           new Date(fromUnixTime(weatherData.hourly[i].dt)),
-          "MMM d, H:00"
+          "MMM d, h a"
         )}`;
         document.getElementById(
           `rain${i}`
@@ -116,6 +177,37 @@ const fetchCelsius = async (query) => {
           weatherData.hourly[i].temp
         )}°`;
       }
+
+      document.getElementById("data0").innerHTML = `${format(
+        new Date(fromUnixTime(weatherData.current.sunrise)),
+        "h:mm a"
+      )}`;
+      document.getElementById("data1").innerHTML = `${format(
+        new Date(fromUnixTime(weatherData.current.sunset)),
+        "h:mm a"
+      )}`;
+      document.getElementById("data2").innerHTML = `${convertToPercent(
+        weatherData.hourly[0].pop
+      )}%`;
+      document.getElementById(
+        "data3"
+      ).innerHTML = `${weatherData.current.humidity}%`;
+      document.getElementById("data4").innerHTML = `${degreeToCompass(
+        weatherData.current.wind_deg
+      )} ${Math.round(weatherData.current.wind_speed)} m/s`;
+      document.getElementById("data5").innerHTML = `${Math.round(
+        weatherData.current.feels_like
+      )}°`;
+      document.getElementById(
+        "data6"
+      ).innerHTML = `${weatherData.minutely[0].precipitation} mm`;
+      document.getElementById("data7").innerHTML = `${hectoPascalToMM(
+        weatherData.current.pressure
+      )} mmHg`;
+      document.getElementById("data8").innerHTML = `${
+        weatherData.current.visibility / 1000
+      } km`;
+      document.getElementById("data9").innerHTML = `${weatherData.current.uvi}`;
     }
   } catch (error) {
     alert(error);
@@ -179,6 +271,12 @@ const convertTemperatures = () => {
       )}° and the low will be ${stripValues(
         document.getElementById("mainLow").innerHTML
       )}°`;
+      document.getElementById(
+        "data5"
+      ).innerHTML = `${convertFahrenheitToCelsius(
+        stripValues(document.getElementById(`data5`).innerHTML)
+      )}°`;
+
       document.getElementById("convertButton").innerHTML = `<b>°C</b> / °F`;
       tempSetting = 1;
     } else if (tempSetting === 1) {
@@ -211,6 +309,12 @@ const convertTemperatures = () => {
       )}° and the low will be ${stripValues(
         document.getElementById("mainLow").innerHTML
       )}°`;
+      document.getElementById(
+        "data5"
+      ).innerHTML = `${convertCelsiusToFahrenheit(
+        stripValues(document.getElementById(`data5`).innerHTML)
+      )}°`;
+
       document.getElementById("convertButton").innerHTML = `°C / <b>°F</b>`;
       tempSetting = 0;
     }
