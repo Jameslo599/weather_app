@@ -1,5 +1,6 @@
 import { makeElement, elementMethods } from "./make-elements";
 
+// Generates all of the elements to hold weather info
 const generateMainDisplay = () => {
   const cityDisplay = makeElement({
     type: "div",
@@ -202,4 +203,13 @@ const generateMainDisplay = () => {
   });
 };
 
-export default generateMainDisplay;
+// Animation while content is being loaded
+const loadAnimation = () => {
+  const spinnerWrapper = document.querySelector(".spinner-wrapper");
+  window.addEventListener("load", () => {
+    setTimeout(() => {
+      spinnerWrapper.remove();
+    }, 500);
+  });
+};
+export { generateMainDisplay, loadAnimation };

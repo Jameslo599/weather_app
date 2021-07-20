@@ -1,3 +1,4 @@
+// Generates DOM element
 const makeElement = ({ type = "", id = "", className = "" } = {}) => {
   const element = document.createElement(type);
   element.setAttribute("id", id);
@@ -5,6 +6,7 @@ const makeElement = ({ type = "", id = "", className = "" } = {}) => {
   return element;
 };
 
+// Appends elements to body
 const elementMethods = (element) => {
   const appendToBody = (destination) =>
     document.getElementById(destination).appendChild(element);

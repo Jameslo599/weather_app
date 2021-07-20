@@ -1,13 +1,14 @@
 import { format, fromUnixTime } from "date-fns";
 
+// 0 = Fahrenheit, 1 = Celsius
 let tempSetting = 0;
-
+// Holds current weather condition for description
 const conditionArray = [];
-
+// Removes all non-numeric values
 const stripValues = (string) => string.replace(/\D/g, "");
 
 const convertToPercent = (decimal) => Math.round(decimal * 100);
-
+// Converts wind angle to a cardinal direction
 const degreeToCompass = (num) => {
   const value = Math.round(num / 22.5 + 0.5);
   const directionArray = [
@@ -38,6 +39,7 @@ const metersToMiles = (num) => Math.round(num * 0.000621);
 
 const mmToInches = (num) => Math.round(num / 25.4);
 
+// Returns forecast in Fahrenheit
 const fetchWeather = async (query) => {
   try {
     const coordinates = await fetch(
@@ -148,6 +150,7 @@ const fetchWeather = async (query) => {
   }
 };
 
+// Returns forecast in Celsius
 const fetchCelsius = async (query) => {
   try {
     const coordinates = await fetch(
@@ -258,6 +261,7 @@ const fetchCelsius = async (query) => {
   }
 };
 
+// Fetches new forecast which search button is clicked. Can also use Enter key for this.
 const submitQuery = () => {
   document.getElementById("searchButton").addEventListener("click", () => {
     if (tempSetting === 0) {
@@ -283,6 +287,7 @@ const convertFahrenheitToCelsius = (fahrenheit) =>
 const convertCelsiusToFahrenheit = (celsius) =>
   Math.round(celsius * (9 / 5) + 32);
 
+// Converts temp from Fahrenheit to Celsius or vice-versa when button is clicked.
 const convertTemperatures = () => {
   document.getElementById("convertButton").addEventListener("click", () => {
     if (tempSetting === 0) {
