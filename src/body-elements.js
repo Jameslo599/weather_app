@@ -125,11 +125,74 @@ const generateMainDisplay = () => {
     dataHolder.appendChild(data);
   }
 
+  const weeklyDisplay = makeElement({
+    type: "div",
+    id: "weeklyDisplay",
+    className: "",
+  });
+  for (let i = 0; i <= 7; i += 1) {
+    const weekHolder = makeElement({
+      type: "div",
+      id: `weekHolder${i}`,
+      className: "weekHold",
+    });
+    weeklyDisplay.appendChild(weekHolder);
+
+    const weekDay = makeElement({
+      type: "h2",
+      id: `weekDay${i}`,
+      className: "week",
+    });
+    weekHolder.appendChild(weekDay);
+
+    const weekImage = makeElement({
+      type: "img",
+      id: `weekImage${i}`,
+      className: "week",
+    });
+    weekHolder.appendChild(weekImage);
+
+    const weekRain = makeElement({
+      type: "h2",
+      id: `weekRain${i}`,
+      className: "week",
+    });
+    weekHolder.appendChild(weekRain);
+
+    const weekHumid = makeElement({
+      type: "h2",
+      id: `weekHumid${i}`,
+      className: "week",
+    });
+    weekHolder.appendChild(weekHumid);
+
+    const weekTemp = makeElement({
+      type: "div",
+      id: `weekTemp${i}`,
+      className: "weekTemp",
+    });
+    weekHolder.appendChild(weekTemp);
+
+    const weekHigh = makeElement({
+      type: "h2",
+      id: `weekHigh${i}`,
+      className: "week",
+    });
+    weekTemp.appendChild(weekHigh);
+
+    const weekLow = makeElement({
+      type: "h2",
+      id: `weekLow${i}`,
+      className: "week",
+    });
+    weekTemp.appendChild(weekLow);
+  }
   const divArray = [
     cityDisplay,
     forecastDisplay,
     descriptionDisplay,
     dataDisplay,
+    weeklyDisplay,
   ];
   divArray.forEach((element) => {
     elementMethods(element).appendToBody("grid");

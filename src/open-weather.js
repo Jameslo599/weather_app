@@ -120,6 +120,28 @@ const fetchWeather = async (query) => {
         weatherData.current.visibility
       )} mi`;
       document.getElementById("data9").innerHTML = `${weatherData.current.uvi}`;
+
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(`weekDay${i}`).innerHTML = `${format(
+          new Date(fromUnixTime(weatherData.daily[i].dt)),
+          "eeee"
+        )}`;
+        document.getElementById(
+          `weekImage${i}`
+        ).src = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
+        document.getElementById(`weekRain${i}`).innerHTML = `${convertToPercent(
+          weatherData.daily[i].pop
+        )}%`;
+        document.getElementById(
+          `weekHumid${i}`
+        ).innerHTML = `${weatherData.daily[i].humidity}%`;
+        document.getElementById(`weekHigh${i}`).innerHTML = `${Math.round(
+          weatherData.daily[i].temp.max
+        )}°`;
+        document.getElementById(`weekLow${i}`).innerHTML = `${Math.round(
+          weatherData.daily[i].temp.min
+        )}°`;
+      }
     }
   } catch (error) {
     alert(error);
@@ -208,6 +230,28 @@ const fetchCelsius = async (query) => {
         weatherData.current.visibility / 1000
       } km`;
       document.getElementById("data9").innerHTML = `${weatherData.current.uvi}`;
+
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(`weekDay${i}`).innerHTML = `${format(
+          new Date(fromUnixTime(weatherData.daily[i].dt)),
+          "eeee"
+        )}`;
+        document.getElementById(
+          `weekImage${i}`
+        ).src = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
+        document.getElementById(`weekRain${i}`).innerHTML = `${convertToPercent(
+          weatherData.daily[i].pop
+        )}%`;
+        document.getElementById(
+          `weekHumid${i}`
+        ).innerHTML = `${weatherData.daily[i].humidity}%`;
+        document.getElementById(`weekHigh${i}`).innerHTML = `${Math.round(
+          weatherData.daily[i].temp.max
+        )}°`;
+        document.getElementById(`weekLow${i}`).innerHTML = `${Math.round(
+          weatherData.daily[i].temp.min
+        )}°`;
+      }
     }
   } catch (error) {
     alert(error);
@@ -277,6 +321,22 @@ const convertTemperatures = () => {
         stripValues(document.getElementById(`data5`).innerHTML)
       )}°`;
 
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(
+          `weekHigh${i}`
+        ).innerHTML = `${convertFahrenheitToCelsius(
+          stripValues(document.getElementById(`weekHigh${i}`).innerHTML)
+        )}°`;
+      }
+
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(
+          `weekLow${i}`
+        ).innerHTML = `${convertFahrenheitToCelsius(
+          stripValues(document.getElementById(`weekLow${i}`).innerHTML)
+        )}°`;
+      }
+
       document.getElementById("convertButton").innerHTML = `<b>°C</b> / °F`;
       tempSetting = 1;
     } else if (tempSetting === 1) {
@@ -314,6 +374,22 @@ const convertTemperatures = () => {
       ).innerHTML = `${convertCelsiusToFahrenheit(
         stripValues(document.getElementById(`data5`).innerHTML)
       )}°`;
+
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(
+          `weekHigh${i}`
+        ).innerHTML = `${convertCelsiusToFahrenheit(
+          stripValues(document.getElementById(`weekHigh${i}`).innerHTML)
+        )}°`;
+      }
+
+      for (let i = 1; i <= 7; i += 1) {
+        document.getElementById(
+          `weekLow${i}`
+        ).innerHTML = `${convertCelsiusToFahrenheit(
+          stripValues(document.getElementById(`weekLow${i}`).innerHTML)
+        )}°`;
+      }
 
       document.getElementById("convertButton").innerHTML = `°C / <b>°F</b>`;
       tempSetting = 0;
