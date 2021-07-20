@@ -154,7 +154,7 @@ const fetchWeather = async (query) => {
 const fetchCelsius = async (query) => {
   try {
     const coordinates = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     const coordinateData = await coordinates.json();
