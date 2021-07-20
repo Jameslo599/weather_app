@@ -144,7 +144,7 @@ const fetchWeather = async (query) => {
       }
     }
   } catch (error) {
-    alert(error);
+    alert("Your search did not return any results");
   }
 };
 
@@ -253,7 +253,7 @@ const fetchCelsius = async (query) => {
       }
     }
   } catch (error) {
-    alert(error);
+    alert("Your search did not return any results");
   }
 };
 
