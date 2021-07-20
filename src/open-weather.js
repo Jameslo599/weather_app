@@ -43,11 +43,10 @@ const mmToInches = (num) => Math.round(num / 25.4);
 const fetchWeather = async (query) => {
   try {
     const coordinates = await fetch(
-      `http://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
+      `https://api.openweathermap.org/geo/1.0/direct?q=${query}&limit=5&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
     );
     const coordinateData = await coordinates.json();
-    console.log(coordinateData);
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=imperial&exclude=alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
@@ -56,7 +55,6 @@ const fetchWeather = async (query) => {
       throw new Error("Your search did not return any results");
     } else {
       const weatherData = await response.json();
-      console.log(weatherData);
       conditionArray.splice(0, 1, weatherData.current.weather[0].description);
       document.getElementById("cityName").innerHTML = coordinateData[0].name;
       document.getElementById("conditionName").innerHTML =
@@ -86,7 +84,7 @@ const fetchWeather = async (query) => {
         ).innerHTML = `Rain: ${convertToPercent(weatherData.hourly[i].pop)}%`;
         document.getElementById(
           `image${i}`
-        ).src = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
+        ).src = `https://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
         document.getElementById(`temp${i}`).innerHTML = `${Math.round(
           weatherData.hourly[i].temp
         )}°`;
@@ -130,7 +128,7 @@ const fetchWeather = async (query) => {
         )}`;
         document.getElementById(
           `weekImage${i}`
-        ).src = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
+        ).src = `https://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
         document.getElementById(`weekRain${i}`).innerHTML = `${convertToPercent(
           weatherData.daily[i].pop
         )}%`;
@@ -158,7 +156,6 @@ const fetchCelsius = async (query) => {
       { mode: "cors" }
     );
     const coordinateData = await coordinates.json();
-    console.log(coordinateData);
     const response = await fetch(
       `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinateData[0].lat}&lon=${coordinateData[0].lon}&units=metric&exclude=alerts&appid=7f7370a963b4d73985e031d0d1b9738f`,
       { mode: "cors" }
@@ -167,7 +164,6 @@ const fetchCelsius = async (query) => {
       throw new Error("Your search did not return any results");
     } else {
       const weatherData = await response.json();
-      console.log(weatherData);
       conditionArray.splice(0, 1, weatherData.current.weather[0].description);
       document.getElementById("cityName").innerHTML = coordinateData[0].name;
       document.getElementById("conditionName").innerHTML =
@@ -197,7 +193,7 @@ const fetchCelsius = async (query) => {
         ).innerHTML = `Rain: ${convertToPercent(weatherData.hourly[i].pop)}%`;
         document.getElementById(
           `image${i}`
-        ).src = `http://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
+        ).src = `https://openweathermap.org/img/wn/${weatherData.hourly[i].weather[0].icon}@2x.png`;
         document.getElementById(`temp${i}`).innerHTML = `${Math.round(
           weatherData.hourly[i].temp
         )}°`;
@@ -241,7 +237,7 @@ const fetchCelsius = async (query) => {
         )}`;
         document.getElementById(
           `weekImage${i}`
-        ).src = `http://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
+        ).src = `https://openweathermap.org/img/wn/${weatherData.daily[i].weather[0].icon}@2x.png`;
         document.getElementById(`weekRain${i}`).innerHTML = `${convertToPercent(
           weatherData.daily[i].pop
         )}%`;
