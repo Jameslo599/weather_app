@@ -91,12 +91,12 @@ body {
   padding: 10px 100px 10px 10px;
 }
 #searchButton {
-  border-radius: 5px 5px 5px 0px;
+  border-radius: 0px 5px 5px 0px;
   border-left: none;
-  border-width: thin;
   background-color: #064420;
+  border-width: thin;
   color: #fdfaf6;
-  padding: 10px;
+  padding: 11px 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.25s;
@@ -318,7 +318,7 @@ body {
     border-radius: 5px 0px 0px 5px;
     border-right: none;
     border-width: thin;
-    padding: 10px 80px 10px 10px;
+    padding: 8px 80px 10px 8px;
   }
   #convertButton {
     float: none;
