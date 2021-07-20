@@ -96,7 +96,7 @@ body {
   border-width: thin;
   background-color: #064420;
   color: #fdfaf6;
-  padding: 10px;
+  padding: 11px 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.25s;
