@@ -91,12 +91,12 @@ body {
   padding: 10px 100px 10px 10px;
 }
 #searchButton {
-  border-radius: 0px 5px 5px 0px;
+  border-radius: 5px 5px 5px 0px;
   border-left: none;
   border-width: thin;
   background-color: #064420;
   color: #fdfaf6;
-  padding: 11px 10px;
+  padding: 10px;
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.25s;
