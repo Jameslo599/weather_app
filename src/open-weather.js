@@ -144,7 +144,10 @@ const fetchWeather = async (query) => {
       }
     }
   } catch (error) {
-    alert("Your search did not return any results");
+    const input = document.getElementById("textInput");
+    input.setCustomValidity("Your search did not return any results");
+    input.reportValidity();
+    input.value = "";
   }
 };
 
@@ -253,7 +256,10 @@ const fetchCelsius = async (query) => {
       }
     }
   } catch (error) {
-    alert("Your search did not return any results");
+    const input = document.getElementById("textInput");
+    input.setCustomValidity("Your search did not return any results");
+    input.reportValidity();
+    input.value = "";
   }
 };
 
